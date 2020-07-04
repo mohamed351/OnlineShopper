@@ -17,3 +17,11 @@ code {
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.menu-color{
+  background-color: #3F51B5 !important;
+  color:#fff;
+}
+.nav-list a{
+  border-bottom: 1px soild #333 !important;
+}

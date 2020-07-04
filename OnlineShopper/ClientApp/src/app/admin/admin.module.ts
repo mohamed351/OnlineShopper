@@ -1,3 +1,4 @@
+import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RolesService } from './services/roles.service';
 import { Routes, RouterModule } from '@angular/router';
@@ -9,6 +10,11 @@ import { ProductsComponent } from './components/products/products.component';
 import { OrdersComponent } from './components/orders/orders.component';
 import { CreateUserComponent } from './components/users/create-user/create-user.component';
 import { EditUserComponent } from './components/users/edit-user/edit-user.component';
+import {MatCardModule} from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select'
+import { CountiesService } from './services/counties.service';
+import { MatIcon, MatIconModule, MatButtonModule } from '@angular/material';
 
 const router: Routes = [
   { path: "", component: HomeComponent },
@@ -24,9 +30,15 @@ const router: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(router),
-    HttpClientModule
+    HttpClientModule,
+    MatCardModule,
+    MatInputModule,
+    MatSelectModule,
+    FormsModule,
+    MatIconModule,
+    MatButtonModule
   ],
-  providers:[RolesService]
+  providers:[RolesService,CountiesService]
   
 })
 export class AdminModule { }

@@ -1,1 +1,86 @@
-<p>Create user Works</p>
+<mat-card>
+     <mat-card-header class="d-block">
+          <h4 class="text-center display-4 header-text">
+          <mat-icon color="primary">person_add</mat-icon>   Create User</h4>
+     </mat-card-header>
+     <hr/>
+     <mat-card-content class="d-flex justify-content-center">
+        
+        <form class="w-50">
+
+          <mat-form-field class="width-50 pr-2">
+            <mat-label>FirstName</mat-label>
+            <input matInput
+                   placeholder="FirstName" class="width-100">
+            <mat-error>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="width-50">
+            <mat-label>LastName</mat-label>
+            <input matInput
+                   placeholder="lastName" class="width-100">
+            <mat-error>
+            </mat-error>
+          </mat-form-field>
+
+            <mat-form-field class="width-100">
+                <mat-label>Email</mat-label>
+                <input matInput
+                       placeholder="Ex. pat@example.com" class="width-100">
+                <mat-error>
+                </mat-error>
+              </mat-form-field>
+
+
+              <mat-form-field class="width-100">
+                <mat-label>UserName</mat-label>
+                <input matInput
+                       placeholder="UserName" class="width-100">
+                <mat-error>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field class="pr-2 width-25">
+                     <mat-label>Choose an option</mat-label>
+                     <mat-select required name="countycode" ngModel #countycode="ngModel" >
+                       <mat-option  *ngFor="let item of Counties" [value]="item.dial_code">
+                           <img [src]="this.GetImage(item.code)">
+                           
+                        {{item.code}} - {{item.name}}  ( {{item.dial_code}})
+                       </mat-option>
+                     
+                     </mat-select>
+                     <mat-error class="width-25">
+                      Country Code is Required
+                    </mat-error>
+                   </mat-form-field>
+                 
+              <mat-form-field class="width-75">
+
+                <mat-label>Phone</mat-label>
+              
+                <input matInput
+                      type="tel" [disabled]="countycode.invalid"  placeholder="Phone" class="width-100">
+                <mat-error>
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field class="width-100">
+                <mat-label>Address</mat-label>
+                <input matInput
+                       placeholder="Address" class="width-100">
+                <mat-error>
+                </mat-error>
+              </mat-form-field>
+              <div class="d-flex justify-content-end">
+                <button mat-flat-button color="primary"><mat-icon>person_add </mat-icon> Create</button>
+              </div>
+        </form>
+        
+      
+     </mat-card-content>
+     <hr/>
+     <div>
+      <a routerLink="/admin/user"> <mat-icon style="vertical-align: sub;">arrow_back </mat-icon> Back to list</a>
+    </div>
+</mat-card>

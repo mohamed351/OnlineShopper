@@ -1,6 +1,6 @@
  export class Roles {
-        id: string;
-        name: string;
-        normalizedName: string;
-        concurrencyStamp: string;
+       public id: string;
+       public name: string;
+       public normalizedName: string;
+       public  concurrencyStamp: string;
 }
