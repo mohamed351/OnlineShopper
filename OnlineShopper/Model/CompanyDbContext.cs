@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +18,25 @@ namespace OnlineShopper.Model
         }
 
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+
+
+        public static async Task CreateDefaultAccounts(IServiceProvider service, Microsoft.Extensions.Configuration.IConfiguration configuration)
+        {
+
+            RoleManager<IdentityRole> role = service.GetRequiredService<RoleManager<IdentityRole>>();
+            var result = role.Roles.FirstOrDefault(a => a.Name == "Admin");
+            if(result == null)
+            {
+                await role.CreateAsync(new IdentityRole("Admin"));
+                
+            }
+             result = role.Roles.FirstOrDefault(a => a.Name == "Customer");
+            if (result == null)
+            {
+                await role.CreateAsync(new IdentityRole("Customer"));
+            }
+
+        }
 
     }
 }

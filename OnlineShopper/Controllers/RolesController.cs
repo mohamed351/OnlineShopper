@@ -5,22 +5,24 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using OnlineShopper.Model;
 
 namespace OnlineShopper.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class RolesController : ControllerBase
     {
-        private readonly UserManager<ApplicationUser> _user;
+        private readonly RoleManager<IdentityRole> role;
 
-        public UsersController(UserManager<ApplicationUser> user)
+        public RolesController(RoleManager<IdentityRole> role)
         {
-            this._user = user;
+            this.role = role;
         }
 
-        
-        
+        [HttpGet]
+        public ActionResult GetRoles()
+        {
+            return Ok(this.role.Roles.ToList());
+        }
     }
 }

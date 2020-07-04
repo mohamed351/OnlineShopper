@@ -1,3 +1,4 @@
+import { RolesService } from './../../../services/roles.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./create-user.component.css']
 })
 export class CreateUserComponent implements OnInit {
-
-  constructor() { }
+  
+  constructor(private RolesService:RolesService) { }
 
   ngOnInit() {
+    this.RolesService.GetRoles().subscribe(a => {
+      console.log(a);
+    });
   }
+
 
 }

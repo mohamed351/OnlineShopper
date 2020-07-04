@@ -1,3 +1,5 @@
+import { HttpClientModule } from '@angular/common/http';
+import { RolesService } from './services/roles.service';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -12,7 +14,8 @@ const router: Routes = [
   { path: "", component: HomeComponent },
   { path: "user", component: UsersComponent },
   { path: "product", component: ProductsComponent },
-  {path:"orders",component:OrdersComponent}
+  { path: "orders", component: OrdersComponent },
+  {path:"create-user",component:CreateUserComponent}
   
 ]
 
@@ -20,7 +23,10 @@ const router: Routes = [
   declarations: [HomeComponent, UsersComponent, ProductsComponent, OrdersComponent, CreateUserComponent, EditUserComponent],
   imports: [
     CommonModule,
-    RouterModule.forChild(router)
-  ]
+    RouterModule.forChild(router),
+    HttpClientModule
+  ],
+  providers:[RolesService]
+  
 })
 export class AdminModule { }
