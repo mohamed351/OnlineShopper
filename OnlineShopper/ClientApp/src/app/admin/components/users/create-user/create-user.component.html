@@ -6,7 +6,7 @@
      <hr/>
      <mat-card-content class="d-flex justify-content-center">
         
-        <form class="w-50">
+        <form class="w-50" [formGroup]="form">
 
           <mat-form-field class="width-50 pr-2">
             <mat-label>FirstName</mat-label>
@@ -27,7 +27,7 @@
             <mat-form-field class="width-100">
                 <mat-label>Email</mat-label>
                 <input matInput
-                       placeholder="Ex. pat@example.com" class="width-100">
+                       placeholder="Ex. pat@example.com" formControlName="email" class="width-100">
                 <mat-error>
                 </mat-error>
               </mat-form-field>
@@ -72,6 +72,15 @@
                 <mat-error>
                 </mat-error>
               </mat-form-field>
+              
+
+              <mat-form-field class="width-100">
+                <mat-label>Roles</mat-label>
+                <mat-select class="width-100">
+                    <mat-option *ngFor="let item of roles" [value]="item.id"> {{item.name}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+
               <div class="d-flex justify-content-end">
                 <button mat-flat-button color="primary"><mat-icon>person_add </mat-icon> Create</button>
               </div>
@@ -83,4 +92,5 @@
      <div>
       <a routerLink="/admin/user"> <mat-icon style="vertical-align: sub;">arrow_back </mat-icon> Back to list</a>
     </div>
+    <p *ngIf="this.Email.pending">... Email is pending </p>
 </mat-card>

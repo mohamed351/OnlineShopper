@@ -1,4 +1,4 @@
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RolesService } from './services/roles.service';
 import { Routes, RouterModule } from '@angular/router';
@@ -15,6 +15,8 @@ import { MatInputModule } from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select'
 import { CountiesService } from './services/counties.service';
 import { MatIcon, MatIconModule, MatButtonModule } from '@angular/material';
+import { UsersService } from './services/users.service';
+
 
 const router: Routes = [
   { path: "", component: HomeComponent },
@@ -36,9 +38,10 @@ const router: Routes = [
     MatSelectModule,
     FormsModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    ReactiveFormsModule
   ],
-  providers:[RolesService,CountiesService]
+  providers:[RolesService,CountiesService,UsersService]
   
 })
 export class AdminModule { }
