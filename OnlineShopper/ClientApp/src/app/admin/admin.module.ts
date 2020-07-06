@@ -16,6 +16,7 @@ import {MatSelectModule} from '@angular/material/select'
 import { CountiesService } from './services/counties.service';
 import { MatIcon, MatIconModule, MatButtonModule } from '@angular/material';
 import { UsersService } from './services/users.service';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 
 const router: Routes = [
@@ -39,7 +40,8 @@ const router: Routes = [
     FormsModule,
     MatIconModule,
     MatButtonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatProgressBarModule
   ],
   providers:[RolesService,CountiesService,UsersService]
   

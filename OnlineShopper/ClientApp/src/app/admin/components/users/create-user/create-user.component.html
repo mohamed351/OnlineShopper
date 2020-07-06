@@ -6,29 +6,42 @@
      <hr/>
      <mat-card-content class="d-flex justify-content-center">
         
-        <form class="w-50" [formGroup]="form">
+        <form class="w-50" [formGroup]="form" (ngSubmit)="SubmitForm()">
 
           <mat-form-field class="width-50 pr-2">
             <mat-label>FirstName</mat-label>
-            <input matInput
+            <input matInput formControlName="firstName"
                    placeholder="FirstName" class="width-100">
-            <mat-error>
+            <mat-error *ngIf="this.FirstName.invalid && this.FirstName.touched">
+              <mat-error *ngIf="this.FirstName.errors.required">First name is Required</mat-error>
+              <mat-error *ngIf="this.FirstName.errors.minlength">the the min lenght should be more {{this.FirstName.errors.minlength.requiredLength}}</mat-error>
+              <mat-error *ngIf="this.FirstName.errors.maxlength">the max lenght should be less than {{this.FirstName.errors.maxlength.requiredLength}}</mat-error>
             </mat-error>
           </mat-form-field>
 
           <mat-form-field class="width-50">
             <mat-label>LastName</mat-label>
             <input matInput
-                   placeholder="lastName" class="width-100">
-            <mat-error>
+                   placeholder="lastName" formControlName="lastName" class="width-100">
+            <mat-error *ngIf="this.LastName.invalid && this.LastName.touched">
+              <mat-error *ngIf="this.LastName.errors.required">Last name is Required</mat-error>
+              <mat-error *ngIf="this.LastName.errors.minlength">the last name min lenght should be more {{this.LastName.errors.minlength.requiredLength}}</mat-error>
+              <mat-error *ngIf="this.LastName.errors.maxlength">the max lenght should be less than {{this.LastName.errors.maxlength.requiredLength}}</mat-error>
             </mat-error>
+
           </mat-form-field>
 
-            <mat-form-field class="width-100">
+
+
+          <mat-form-field class="width-100">
                 <mat-label>Email</mat-label>
                 <input matInput
                        placeholder="Ex. pat@example.com" formControlName="email" class="width-100">
-                <mat-error>
+                       <mat-progress-bar mode="buffer" *ngIf="this.Email.pending"></mat-progress-bar>
+                <mat-error *ngIf="this.Email.invalid && this.Email.touched">
+                  <mat-error *ngIf="this.Email.errors.required"> The Email is Required</mat-error>
+                  <mat-error *ngIf="this.Email.errors.email"> please write a valid email</mat-error>
+                  <mat-error *ngIf="this.Email.errors.Unique"> please write a valid email</mat-error>
                 </mat-error>
               </mat-form-field>
 
@@ -36,13 +49,32 @@
               <mat-form-field class="width-100">
                 <mat-label>UserName</mat-label>
                 <input matInput
-                       placeholder="UserName" class="width-100">
-                <mat-error>
+                       placeholder="UserName" formControlName="userName" class="width-100">
+               <mat-progress-bar mode="buffer" *ngIf="this.UserName.pending"></mat-progress-bar>
+
+                <mat-error *ngIf="this.UserName.invalid && this.UserName.touched">
+                  <mat-error *ngIf="this.UserName.errors.required"> The UserName is Required</mat-error>
+                  <mat-error *ngIf="this.UserName.errors.minlength"> the Username min lenght should be more {{this.UserName.errors.minlength.requiredLength}}</mat-error>
+                  <mat-error *ngIf="this.UserName.errors.Unique"> please write a valid email</mat-error>
+                  <mat-error *ngIf="this.UserName.errors.maxlength">the max lenght should be less than {{this.UserName.errors.maxlength.requiredLength}}</mat-error>
                 </mat-error>
               </mat-form-field>
+
+
+              <mat-form-field class="width-100">
+                <mat-label>Password</mat-label>
+                <input matInput type="password"
+                       placeholder="Password" formControlName="password" class="width-100">
+                <mat-error *ngIf="this.Password.touched && this.Password.invalid">
+                  <mat-error *ngIf="this.Password.errors.required"> The password is Required</mat-error>
+                  <mat-error *ngIf="this.Password.errors.minlength"> the password min lenght should be more {{this.Password.errors.minlength.requiredLength}}</mat-error>
+                  <mat-error *ngIf="this.Password.errors.maxlength"> the password max lenght should be more {{this.Password.errors.maxlength.requiredLength}}</mat-error>
+                </mat-error>
+              </mat-form-field>
+
               <mat-form-field class="pr-2 width-25">
                      <mat-label>Choose an option</mat-label>
-                     <mat-select required name="countycode" ngModel #countycode="ngModel" >
+                     <mat-select required name="countycode" ngModel (selectionChange)="SelectChange(countycode)" #countycode="ngModel" [ngModelOptions]="{standalone: true}" >
                        <mat-option  *ngFor="let item of Counties" [value]="item.dial_code">
                            <img [src]="this.GetImage(item.code)">
                            
@@ -60,29 +92,37 @@
                 <mat-label>Phone</mat-label>
               
                 <input matInput
-                      type="tel" [disabled]="countycode.invalid"  placeholder="Phone" class="width-100">
-                <mat-error>
+                      type="tel" [disabled]="countycode.invalid" formControlName="phone"  placeholder="Phone" class="width-100">
+                <mat-error *ngIf="this.Phone.touched && this.Phone.invalid">
+                  <mat-error *ngIf="this.Phone.errors.required"> The Phone is Required</mat-error>
                 </mat-error>
               </mat-form-field>
 
               <mat-form-field class="width-100">
                 <mat-label>Address</mat-label>
-                <input matInput
+                <input matInput formControlName="address"
                        placeholder="Address" class="width-100">
-                <mat-error>
+                <mat-error *ngIf="this.Address.invalid && this.Address.touched">
+                <mat-error *ngIf="this.Address.errors.required">
+                  The Address is Required
                 </mat-error>
+              </mat-error>
               </mat-form-field>
               
 
               <mat-form-field class="width-100">
                 <mat-label>Roles</mat-label>
-                <mat-select class="width-100">
+                <mat-select class="width-100" formControlName="role">
                     <mat-option *ngFor="let item of roles" [value]="item.id"> {{item.name}}</mat-option>
+                    
                 </mat-select>
+                <mat-error *ngIf="this.Role.invalid && this.Role.touched">
+                  <mat-error *ngIf="this.Role.errors.required">Role is Required</mat-error>
+                </mat-error>
               </mat-form-field>
 
               <div class="d-flex justify-content-end">
-                <button mat-flat-button color="primary"><mat-icon>person_add </mat-icon> Create</button>
+                <button mat-flat-button color="primary" [disabled]="this.Form.invalid && this.selectedCountryCode ==null"><mat-icon>person_add </mat-icon> Create</button>
               </div>
         </form>
         
@@ -92,5 +132,5 @@
      <div>
       <a routerLink="/admin/user"> <mat-icon style="vertical-align: sub;">arrow_back </mat-icon> Back to list</a>
     </div>
-    <p *ngIf="this.Email.pending">... Email is pending </p>
+  
 </mat-card>

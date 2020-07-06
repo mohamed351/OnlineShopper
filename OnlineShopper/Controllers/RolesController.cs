@@ -14,15 +14,12 @@ namespace OnlineShopper.Controllers
     {
         private readonly RoleManager<IdentityRole> role;
 
-        public RolesController(RoleManager<IdentityRole> role)
-        {
+        public RolesController(RoleManager<IdentityRole> role)=>
             this.role = role;
-        }
+        
 
         [HttpGet]
-        public ActionResult GetRoles()
-        {
-            return Ok(this.role.Roles.ToList());
-        }
+        public ActionResult GetRoles()=>
+             Ok(this.role.Roles.ToList());
     }
 }

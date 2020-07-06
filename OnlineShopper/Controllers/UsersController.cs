@@ -28,7 +28,7 @@ namespace OnlineShopper.Controllers
         /// <returns>false if email exist else return true</returns>
         [HttpGet("CheckEmail/{email?}")]
         public async Task<ActionResult<bool>> CheckEmail([FromQuery]string email="")
-        {
+          {
             if(email == null)
             {
                 return Ok( new {result =false});
@@ -39,6 +39,20 @@ namespace OnlineShopper.Controllers
            var result = checkEmail == null ? true : false;
             return Ok(new { result });
         }
+        [HttpGet("CheckUserName/{userName?}")]
+        public async Task<ActionResult> CheckUserName([FromQuery] string userName = "")
+        {
+            if(userName == null)
+            {
+                return Ok(new { result = false });
+            }
+            var checkUserName = await _user.FindByNameAsync(userName);
+
+            var result = checkUserName == null ? true : false;
+            return Ok(new { result });
+
+        }
+
 
         
         
