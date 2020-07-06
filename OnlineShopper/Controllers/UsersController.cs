@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using OnlineShopper.Model;
+using OnlineShopper.ViewModels;
 
 namespace OnlineShopper.Controllers
 {
@@ -52,9 +53,42 @@ namespace OnlineShopper.Controllers
             return Ok(new { result });
 
         }
+        [HttpPost]
+        public async Task<ActionResult> CreateUser(CreateUserViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest("The User Data is not valid");
+            var user = await _user.CreateAsync(new ApplicationUser() { 
+                Address = viewModel.Address,
+                Email = viewModel.Email,
+                FirstName = viewModel.FirstName,
+                LastName = viewModel.LastName,
+                Image ="default.png",
+                PhoneNumber =viewModel.Phone,
+                UserName =viewModel.UserName
+            },viewModel.Password);
+            if (user.Succeeded)
+            {
+                return Ok(user);
+            }
+            else
+            {
+               return BadRequest(user.Errors);
+            }
+            
+        }
+        /*
+         * address: "Alexandria"
+            email: "mohamed.perry351@gmail.com"
+            firstName: "mohamed"
+            lastName: "Amer"
+            password: "0104859520"
+            phone: "+20 01024181643"
+            role: "236fbaa0-f3b8-40ae
+         */
 
 
-        
-        
+
+
     }
 }

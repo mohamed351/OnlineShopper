@@ -41,6 +41,9 @@ export class UsersService {
       }
     )
   };
+  CreateUser(data) {
+    return this.http.post("/api/users", data);
+  }
   
   
 }

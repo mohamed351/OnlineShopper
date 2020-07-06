@@ -57,7 +57,10 @@ export class CreateUserComponent implements OnInit {
   }
   SubmitForm() {
     this.form.value.phone =this.selectedCountryCode+" "+this.form.value.phone
-   console.log(this.form.value);
+    console.log(this.form.value);
+    this.UsersService.CreateUser(this.form.value).subscribe(a => {
+      console.log(a);
+    });
   }
 
   get Form() {

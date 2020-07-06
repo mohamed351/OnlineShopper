@@ -35,8 +35,9 @@ namespace OnlineShopper
             {
                 a.Password.RequireDigit = false;
                 a.Password.RequireLowercase = false;
-                a.Password.RequireLowercase = false;
+                a.Password.RequireUppercase = false;
                 a.Password.RequireNonAlphanumeric = false;
+                
                 
             }).AddEntityFrameworkStores<CompanyDbContext>();
 
