@@ -14,9 +14,11 @@ import {MatCardModule} from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select'
 import { CountiesService } from './services/counties.service';
-import { MatIcon, MatIconModule, MatButtonModule } from '@angular/material';
+import { MatIcon, MatIconModule, MatButtonModule, MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
 import { UsersService } from './services/users.service';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { DatatableDataSource } from './components/users/user.datasource';
+import { ToastrModule } from 'ngx-toastr';
 
 
 const router: Routes = [
@@ -41,7 +43,11 @@ const router: Routes = [
     MatIconModule,
     MatButtonModule,
     ReactiveFormsModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    
   ],
   providers:[RolesService,CountiesService,UsersService]
   

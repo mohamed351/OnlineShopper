@@ -1,3 +1,4 @@
+import { PagerViewModel, PagerResult } from './../model/pager';
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import {
@@ -8,12 +9,13 @@ import {
 } from "@angular/forms";
 import { Observable, Observer } from "rxjs";
 import "rxjs/Rx";
+import { UserSelect } from '../model/users';
 
 @Injectable({
   providedIn: "root",
 })
 export class UsersService {
-  constructor(private http: HttpClient) { }
+  constructor(public http: HttpClient) { }
   EmailMustBeUnique = (
     AbstractControl: AbstractControl
   ): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> => {
@@ -44,6 +46,11 @@ export class UsersService {
   CreateUser(data) {
     return this.http.post("/api/users", data);
   }
+
+  GetUsers(data: PagerViewModel) {
+    return this.http.get<PagerResult<UserSelect>>(`/api/Users/?pageSize=${data.pageSize}&Start=${data.start}`);
+  }
+  
   
   
 }

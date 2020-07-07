@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OnlineShopper.ViewModels
+namespace OnlineShopper.ViewModels.UserViewModels
 {
     public class CreateUserViewModel
     {

@@ -15,7 +15,12 @@ import { MatSelectModule } from '@angular/material/select';
 import {MatButtonModule} from '@angular/material/button';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatListModule } from '@angular/material/list'
+import { MatListModule } from '@angular/material/list';
+import { DatatableComponent } from './datatable/datatable.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort'
+import { ToastrModule } from 'ngx-toastr';
 
 
 
@@ -27,6 +32,7 @@ import { MatListModule } from '@angular/material/list'
     AppComponent,
     AdminComponent,
     UserComponent,
+    DatatableComponent,
    
   
     
@@ -44,7 +50,11 @@ import { MatListModule } from '@angular/material/list'
     LayoutModule,
     MatToolbarModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+ 
   ],
   providers: [],
   bootstrap: [AppComponent]

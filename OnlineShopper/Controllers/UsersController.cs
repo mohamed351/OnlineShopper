@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using OnlineShopper.Model;
 using OnlineShopper.ViewModels;
+using OnlineShopper.ViewModels.UserViewModels;
 
 namespace OnlineShopper.Controllers
 {
@@ -16,10 +18,12 @@ namespace OnlineShopper.Controllers
     public class UsersController : ControllerBase
     {
         private readonly UserManager<ApplicationUser> _user;
-      
-        public UsersController(UserManager<ApplicationUser> user)
+        private readonly IMapper _mapper;
+
+        public UsersController(UserManager<ApplicationUser> user , IMapper mapper)
         {
             this._user = user;
+            this._mapper = mapper;
         }
         
         /// <summary>
@@ -53,9 +57,28 @@ namespace OnlineShopper.Controllers
             return Ok(new { result });
 
         }
+        [HttpGet]
+        public ActionResult<IEnumerable<ApplicationUser>> GetUsers([FromQuery]PagerViewModel viewModel)
+        {
+            var model = new
+            {
+                Data = _mapper.Map<IEnumerable<ApplicationUser>, IEnumerable<SelectUserViewModel>>(_user.Users
+                .OrderBy(a => a.Id)
+                .Skip(viewModel.PageSize *viewModel.Start)
+                .Take(viewModel.PageSize)
+                .ToList()),
+
+                TotalCount = _user.Users.Count()
+            };
+
+          return  Ok(model);
+        }
+
+
         [HttpPost]
         public async Task<ActionResult> CreateUser(CreateUserViewModel viewModel)
         {
+            //this function need refactoing
             if (!ModelState.IsValid)
                 return BadRequest("The User Data is not valid");
             var user = await _user.CreateAsync(new ApplicationUser() { 

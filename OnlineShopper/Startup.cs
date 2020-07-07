@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -9,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using OnlineShopper.Model;
+using System.Reflection;
 using System.Text;
 
 namespace OnlineShopper
@@ -41,6 +43,7 @@ namespace OnlineShopper
                 
             }).AddEntityFrameworkStores<CompanyDbContext>();
 
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddAuthentication().AddCookie().AddJwtBearer(a=>
             {
                 a.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
