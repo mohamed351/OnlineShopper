@@ -26,7 +26,8 @@ const router: Routes = [
   { path: "user", component: UsersComponent },
   { path: "product", component: ProductsComponent },
   { path: "orders", component: OrdersComponent },
-  {path:"create-user",component:CreateUserComponent}
+  { path: "create-user", component: CreateUserComponent },
+  {path:"edit-user/:id",component:EditUserComponent}
   
 ]
 
